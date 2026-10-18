@@ -6,7 +6,7 @@ using ECommons.Logging;
 using ECommons.UIHelpers.AddonMasterImplementations;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Component.GUI;
-using Lumina.Excel.Sheets;
+using LuminaItem = Lumina.Excel.Sheets.Item;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -394,7 +394,7 @@ public unsafe class UndercutEngine : IDisposable
         var key = ItemRule.Key(itemId, hq);
         if (!C.Rules.TryGetValue(key, out var rule))
         {
-            var name = Svc.Data.GetExcelSheet<Item>()?.GetRowOrDefault(itemId)?.Name.ToString() ?? $"Item {itemId}";
+            var name = Svc.Data.GetExcelSheet<LuminaItem>()?.GetRowOrDefault(itemId)?.Name.ToString() ?? $"Item {itemId}";
             rule = new ItemRule { ItemId = itemId, Hq = hq, Name = name + (hq ? " (HQ)" : "") };
             C.Rules[key] = rule;
         }
