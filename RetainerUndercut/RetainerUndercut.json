@@ -1,0 +1,7 @@
+{
+  "Author": "you",
+  "Name": "Retainer Undercut",
+  "Punchline": "Undercuts your retainer listings, with floors and big-drop confirmation.",
+  "Description": "Checks each retainer listing against the market board and undercuts by a configurable amount. Asks before large price drops or going below a per-item floor. Runs standalone or as an AutoRetainer postprocess task.",
+  "Tags": [ "retainer", "market" ]
+}

@@ -1,0 +1,14 @@
+<Project Sdk="Dalamud.NET.Sdk/15.0.0">
+  <PropertyGroup>
+    <Version>0.1.0</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Must match (or exceed) the ECommons version AutoRetainerAPI uses, or NuGet will refuse to restore. -->
+    <PackageReference Include="ECommons" Version="3.2.0.11" />
+    <!-- Git submodule at the repo root. -->
+    <ProjectReference Include="..\AutoRetainerAPI\AutoRetainerAPI\AutoRetainerAPI.csproj" />
+  </ItemGroup>
+</Project>
