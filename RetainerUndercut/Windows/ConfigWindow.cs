@@ -3,6 +3,7 @@ using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
 using System;
 using System.Linq;
+using System.Numerics;
 
 namespace RetainerUndercut.Windows;
 
@@ -24,7 +25,7 @@ public class ConfigWindow : Window
     {
         if (engine.IsBusy)
         {
-            ImGui.TextColored(new(0.4f, 1f, 0.4f, 1f), "Running…");
+            ImGui.TextColored(new Vector4(0.4f, 1f, 0.4f, 1f), "Running…");
             ImGui.SameLine();
             if (ImGui.Button("Stop")) engine.Abort();
         }
