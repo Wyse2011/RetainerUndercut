@@ -3,6 +3,7 @@ using ECommons.Automation;
 using ECommons.Automation.NeoTaskManager;
 using ECommons.DalamudServices;
 using ECommons.Logging;
+using ECommons.Throttlers;
 using ECommons.UIHelpers.AddonMasterImplementations;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Component.GUI;
@@ -259,9 +260,10 @@ public unsafe class UndercutEngine : IDisposable
         if (TryGetReady("RetainerSellList", out _)) return true;
         if (!TryGetReady("SelectString", out var ss)) return false;
         if (!EzThrottler.Throttle("RU.SelectString", 1000)) return false;
-        var entry = new AddonMaster.SelectString(ss).Entries.FirstOrDefault(e => e.Text.Contains(C.SellMenuText, StringComparison.OrdinalIgnoreCase));
-        if (entry.Text == null) { PluginLog.Warning("Sell menu entry not found; check SellMenuText."); return false; }
-        entry.Select();
+        var entries = new AddonMaster.SelectString(ss).Entries;
+        var idx = Array.FindIndex(entries, e => e.Text.Contains(C.SellMenuText, StringComparison.OrdinalIgnoreCase));
+        if (idx < 0) { PluginLog.Warning("Sell menu entry not found; check SellMenuText."); return false; }
+        entries[idx].Select();
         return false;
     }
 
@@ -300,7 +302,7 @@ public unsafe class UndercutEngine : IDisposable
         if (!TryGetReady("RetainerList", out var rl)) return false;
         if (!EzThrottler.Throttle("RU.RetainerList", 1000)) return false;
         var r = new AddonMaster.RetainerList(rl).Retainers.FirstOrDefault(x => x.Name == name);
-        if (r.Name == null) return false;
+        if (r == null) return false;
         r.Select();
         return true;
     }
